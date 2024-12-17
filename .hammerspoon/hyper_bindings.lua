@@ -39,16 +39,15 @@ function mkFocusByPreferredApplicationTitle(stopOnFirst, ...)
 end
 
 local applicationHotkeys = {
-	a = "Activity monitor",
+	a = "iTerm",
 	b = "Brave Browser",
 	c = "Visual Studio Code",
 	-- p = 'Postman',
-	i = "Insomnia",
 	w = "Bitwarden",
 	h = "Hammerspoon",
 	n = "Notes",
 	s = "Slack",
-	t = "WezTerm",
+	t = "iTerm",
 	d = "Discord",
 	g = "Goland",
 }

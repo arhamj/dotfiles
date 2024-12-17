@@ -89,6 +89,20 @@ lspconfig["emmet_ls"].setup({
 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 })
 
+-- configure rust analyzer server
+lspconfig["rust_analyzer"].setup({
+	settings = {
+		["rust-analyzer"] = {
+			diagnostics = {
+				enable = false,
+			},
+		},
+	},
+})
+
+-- configure golang server
+lspconfig["gopls"].setup({})
+
 -- configure lua server (with special settings)
 lspconfig["lua_ls"].setup({
 	capabilities = capabilities,
