@@ -5,8 +5,8 @@ One repo, one command, and a fresh Mac ends up configured the same way every tim
 
 Architecture and anti-drift design borrowed from
 [kunchenguid/dotfiles](https://github.com/kunchenguid/dotfiles) - see
-`DRIFT-PLAN.md` for the drift analysis that motivated this structure and
-`kun-chen-environment-setup-guide.md` for the original guide.
+`docs/drift-plan.md` for the drift analysis that motivated this structure and
+`docs/kun-chen-environment-setup-guide.md` for the original guide.
 
 ## What you get
 
