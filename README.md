@@ -33,6 +33,9 @@ and anti-drift design borrowed from
 
 ## Fresh-machine setup
 
+Full step-by-step, including the pre-flight (SSH key, Command Line Tools)
+and the post-bootstrap manual finishes: `docs/new-machine-setup.md`.
+
 ```sh
 git clone git@github.com:arhamj/dotfiles.git
 cd dotfiles
@@ -108,7 +111,7 @@ exists (the filename is gitignored).
 - `home.nix` - user level: zsh, starship, and every symlink described below.
 - `bootstrap.sh` / `rebuild.sh` / `doctor.sh` - install / apply / verify.
 - `home/` - the real config files, symlinked into place.
-- `docs/` - drift analysis, setup inventory, deferred tool snippets.
+- `docs/` - new-machine walkthrough, deferred tool snippets, drift analysis.
 
 ## How the symlinks work
 
