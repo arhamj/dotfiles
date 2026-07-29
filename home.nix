@@ -57,7 +57,6 @@ in
       # tool paths
       export PATH="$HOME/.local/bin:$PATH"
       export PATH="$PATH:$HOME/go/bin"
-      export PATH="$PATH:$HOME/.bun/bin"
 
       # machine-local files, never committed (gitignored):
       #   secrets.zsh - tokens and client secrets

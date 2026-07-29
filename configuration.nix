@@ -37,9 +37,6 @@
     onActivation.cleanup = "none";
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
-    taps = [
-      "oven-sh/bun" # bun
-    ];
     brews = [
       "herdr"
       # shell + editor core
@@ -49,7 +46,6 @@
       "zoxide"
       "eza"
       "bat"
-      "oven-sh/bun/bun"
       # everyday cli
       "fd"
       "ripgrep"

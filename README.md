@@ -14,7 +14,7 @@ and anti-drift design borrowed from
 
 - System settings (dark mode, key repeat, dock, Finder, trackpad)
 - Homebrew itself, plus a small declared set (full list in `configuration.nix`):
-  - CLI: herdr, neovim, nvm, pyenv, zoxide, eza, bat, bun, fd, ripgrep, fzf,
+  - CLI: herdr, neovim, nvm, pyenv, zoxide, eza, bat, fd, ripgrep, fzf,
     jq, gh, lazygit, lazydocker, yazi, btop, cloc, yt-dlp, k9s, tuxedo
   - Apps: wezterm, claude-code, hammerspoon, raycast, maccy, rectangle,
     monitorcontrol, Nerd Fonts

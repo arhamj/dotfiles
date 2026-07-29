@@ -96,3 +96,6 @@ alias code="cursor"
   dependencies when something needs them; add only if you hit a script that
   requires GNU userland tools.
 - **jiggler / hiddenbar**: removed by choice, not deferred.
+- **bun**: removed by choice (redundant with nvm/node/pnpm; opencode manages
+  its own runtime). If you want it back: `brew install oven-sh/bun/bun` and
+  add `export PATH="$PATH:$HOME/.bun/bin"` to `local.zsh`.
