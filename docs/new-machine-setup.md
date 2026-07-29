@@ -30,8 +30,7 @@ slow (downloads brew + all packages). Grab coffee.
 - **Hammerspoon**: launch it, grant Accessibility and Screen Recording
   permissions when prompted, then reload config (or it auto-loads)
 - **Agent harnesses**: install their native selves - claude and herdr
-  self-install to `~/.local/bin`, pi and codex via npm. (The claude-code
-  cask from bootstrap is only a fallback.)
+  self-install to `~/.local/bin`, pi and codex via npm.
 - **Secrets**: create `~/.config/zsh/secrets.zsh` with any tokens
   (gitignored, sourced automatically)
 - **Machine-specific extras**: create `~/.config/zsh/local.zsh` if this

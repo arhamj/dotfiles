@@ -67,9 +67,8 @@
       "tuxedo"
     ];
     casks = [
-      # terminal + agent
+      # terminal
       "wezterm"
-      "claude-code" # fallback for the ~/.local/bin self-install
       # system layer (raycast provides the hyper key hammerspoon binds to)
       "hammerspoon"
       "raycast"
@@ -80,9 +79,6 @@
       "maccy"
       "rectangle"
       "monitorcontrol"
-      "notunes"
-      "appcleaner"
-      "aldente"
     ];
   };
 }

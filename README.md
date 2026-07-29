@@ -16,8 +16,8 @@ and anti-drift design borrowed from
 - Homebrew itself, plus a small declared set (full list in `configuration.nix`):
   - CLI: herdr, neovim, nvm, pyenv, zoxide, eza, bat, bun, fd, ripgrep, fzf,
     jq, gh, lazygit, lazydocker, yazi, btop, cloc, yt-dlp, k9s, tuxedo
-  - Apps: wezterm, claude-code, hammerspoon, raycast, maccy, rectangle,
-    monitorcontrol, notunes, appcleaner, aldente, Nerd Fonts
+  - Apps: wezterm, hammerspoon, raycast, maccy, rectangle, monitorcontrol,
+    Nerd Fonts
 - Shell (zsh + oh-my-zsh plugins, starship prompt)
 - Editor (kickstart-based Neovim config, plugin versions pinned by lazy-lock)
 - Terminal (WezTerm: coolnight colors, random tab names, Ctrl+A leader keys)
@@ -60,8 +60,8 @@ After the first switch, finish these by hand (none are declarable):
 
 - **Raycast**: enable the hyper key (Hammerspoon's bindings depend on it)
 - **Hammerspoon**: grant Accessibility and Screen Recording permissions
-- **claude / herdr / pi / codex**: their own installers put them in
-  `~/.local/bin` or via npm (the claude-code cask is just a fallback)
+- **claude / herdr / pi / codex**: install via their own installers
+  (`~/.local/bin` self-installs or npm)
 - Sign into things, drop any secrets into `~/.config/zsh/secrets.zsh`
 
 ## Daily use
