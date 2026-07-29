@@ -1,0 +1,4 @@
+{
+  "Lua.diagnostics.globals": ["hs", "spoon"],
+  "Lua.diagnostics.disable": ["lowercase-global"]
+}

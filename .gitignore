@@ -1,0 +1,16 @@
+# macOS + nix build noise
+.DS_Store
+result
+result-*
+
+# herdr runtime artifacts (regenerated at runtime; never commit)
+home/.config/herdr/*.log
+home/.config/herdr/*.sock
+home/.config/herdr/session.json
+home/.config/herdr/release-notes.json
+
+# Hammerspoon runtime-downloaded spoons (reinstalled by SpoonInstall)
+home/.hammerspoon/Spoons/
+
+# machine-local secrets, sourced by zsh if present - never commit
+secrets.zsh
