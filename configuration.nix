@@ -105,7 +105,6 @@
       "claude-code"
       # system utilities
       "hammerspoon"
-      "karabiner-elements"
       "raycast"
       "rectangle"
       "maccy"

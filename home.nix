@@ -119,8 +119,6 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.hammerspoon";
   home.file.".config/nvim".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
-  home.file.".config/karabiner/karabiner.json".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner/karabiner.json";
   home.file.".gitconfig".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.gitconfig";
   home.file.".gitignore_global".source =

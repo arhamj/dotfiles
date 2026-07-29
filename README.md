@@ -18,7 +18,7 @@ Running the switch builds:
 - Shell (zsh + oh-my-zsh plugins, starship prompt, zoxide/eza, all PATH setup)
 - Editor (kickstart-based Neovim config, vendored)
 - Terminal (WezTerm: coolnight colors, random tab names, Ctrl+A leader keys)
-- Window/automation layer (Hammerspoon hyper bindings, Karabiner caps_lock -> hyper)
+- Window/automation layer (Hammerspoon hyper bindings, hyper key via Raycast)
 - Agent configs (one `AGENTS.md` fanned out to Claude, Codex, opencode, and pi;
   Claude `settings.json` with herdr hooks)
 - Git config (SSH signing, global ignores, commit template)
@@ -119,5 +119,4 @@ exists (the filename is gitignored). Put tokens and client secrets there.
 
 The first `nvim` launch on a fresh machine bootstraps lazy.nvim and plugins
 from GitHub (needs network once). Hammerspoon needs Accessibility and
-Screen Recording permissions after first launch; Karabiner-Elements needs its
-own permissions before the hyper key works.
+Screen Recording permissions after first launch.
