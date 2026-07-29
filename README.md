@@ -8,8 +8,7 @@ It declares only what belongs on every Mac I use - anything machine-specific
 or occasional lives outside the repo (see "Extending" below). Architecture
 and anti-drift design borrowed from
 [kunchenguid/dotfiles](https://github.com/kunchenguid/dotfiles) - see
-`docs/drift-plan.md` for the analysis and `docs/setup-inventory.md` for how
-the final package set was chosen.
+`docs/drift-plan.md` for the analysis.
 
 ## What a fresh machine gets
 
