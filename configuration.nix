@@ -67,8 +67,9 @@
       "tuxedo"
     ];
     casks = [
-      # terminal
+      # terminal + agent
       "wezterm"
+      "claude-code"
       # system layer (raycast provides the hyper key hammerspoon binds to)
       "hammerspoon"
       "raycast"
