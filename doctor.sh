@@ -21,7 +21,9 @@ note "==> symlinks into the repo"
 check_link() { # $1 = path relative to $HOME
   local target="$HOME/$1"
   local resolved
-  resolved="$(readlink "$target" 2>/dev/null || true)"
+  # Fully resolve: home-manager's mkOutOfStoreSymlink chains through the
+  # nix store before reaching the repo, so a single readlink is not enough.
+  resolved="$(readlink -f "$target" 2>/dev/null || true)"
   case "$resolved" in
     "$DIR"/*) ok "$1" ;;
     *) bad "$1 is not a symlink into the repo (found: ${resolved:-missing})" ;;

@@ -76,6 +76,7 @@
       "maccy"
       "rectangle"
       "monitorcontrol"
+      "google-chrome"
     ];
   };
 }
