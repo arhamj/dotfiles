@@ -29,7 +29,6 @@ in
       cd = "z";
       vi = "nvim";
       clc = "clear";
-      code = "cursor";
       lg = "lazygit";
       ld = "lazydocker";
       lzd = "lazydocker";
@@ -39,12 +38,6 @@ in
       # then adopts the API-key home instead of the ChatGPT account.
       codex = ''CODEX_HOME="$HOME/.codex-cli" codex'';
     };
-
-    # .zshrc, before compinit
-    initContentBeforeCompInit = ''
-      # Docker CLI completions
-      fpath=(${config.home.homeDirectory}/.docker/completions $fpath)
-    '';
 
     # .zshrc body
     initContent = ''
@@ -63,39 +56,25 @@ in
 
       # tool paths
       export PATH="$HOME/.local/bin:$PATH"
-      export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
-      export PATH="$HOME/development/flutter/bin:$PATH"
-      export ANDROID_HOME="$HOME/Library/Android/sdk"
-      export PATH="$PATH:$ANDROID_HOME/emulator"
-      export PATH="$PATH:$ANDROID_HOME/platform-tools"
-      export PATH="$PATH:$HOME/.pub-cache/bin"
       export PATH="$PATH:$HOME/go/bin"
-      export PATH="$PATH:$HOME/.antigravity/antigravity/bin"
       export PATH="$PATH:$HOME/.bun/bin"
-      # Do NOT export CPATH here: it leaks macOS SDK headers into iOS/clang
-      # builds ("redefinition of module") and breaks Xcode.
 
-      export WIKI="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/wiki"
-
-      # Google Cloud SDK (manual install under ~)
-      if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
-      if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
-
-      # machine-local secrets, never committed (see README)
+      # machine-local files, never committed (gitignored):
+      #   secrets.zsh - tokens and client secrets
+      #   local.zsh   - machine-specific PATH lines and exports
+      # Deferred tool snippets live in docs/deferred-setup.md.
       if [ -f "$HOME/.config/zsh/secrets.zsh" ]; then . "$HOME/.config/zsh/secrets.zsh"; fi
+      if [ -f "$HOME/.config/zsh/local.zsh" ]; then . "$HOME/.config/zsh/local.zsh"; fi
     '';
 
     # .zshenv - keep minimal, sourced by every zsh including non-interactive
     envExtra = ''
       [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
-      export PATH="$PATH:$HOME/.foundry/bin"
     '';
 
     # .zprofile - login shells
     profileExtra = ''
       eval "$(/opt/homebrew/bin/brew shellenv)"
-      [ -f "$HOME/.rye/env" ] && source "$HOME/.rye/env"
-      [ -f "$HOME/.swiftly/env.sh" ] && . "$HOME/.swiftly/env.sh"
     '';
   };
 
@@ -123,8 +102,6 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.gitconfig";
   home.file.".gitignore_global".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.gitignore_global";
-  home.file.".stCommitMsg".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.stCommitMsg";
   home.file.".claude/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.claude/settings.json";
 

@@ -3,25 +3,29 @@
 My personal Mac setup, managed with nix-darwin and home-manager.
 One repo, one command, and a fresh Mac ends up configured the same way every time.
 
-Architecture and anti-drift design borrowed from
+Scope: **minimal and global**. This repo is for setting up NEW machines.
+It declares only what belongs on every Mac I use - anything machine-specific
+or occasional lives outside the repo (see "Extending" below). Architecture
+and anti-drift design borrowed from
 [kunchenguid/dotfiles](https://github.com/kunchenguid/dotfiles) - see
-`docs/drift-plan.md` for the drift analysis that motivated this structure and
-`docs/kun-chen-environment-setup-guide.md` for the original guide.
+`docs/drift-plan.md` for the analysis and `docs/setup-inventory.md` for how
+the final package set was chosen.
 
-## What you get
-
-Running the switch builds:
+## What a fresh machine gets
 
 - System settings (dark mode, key repeat, dock, Finder, trackpad)
-- Homebrew apps (casks and CLI tools), with `cleanup = "zap"`: anything not
-  declared in `configuration.nix` gets uninstalled on every switch
-- Shell (zsh + oh-my-zsh plugins, starship prompt, zoxide/eza, all PATH setup)
-- Editor (kickstart-based Neovim config, vendored)
+- Homebrew itself, plus a small declared set (full list in `configuration.nix`):
+  - CLI: herdr, neovim, nvm, pyenv, zoxide, eza, bat, bun, fd, ripgrep, fzf,
+    jq, gh, lazygit, lazydocker, yazi, btop, cloc, yt-dlp, k9s, tuxedo
+  - Apps: wezterm, claude-code, hammerspoon, raycast, maccy, rectangle,
+    monitorcontrol, notunes, appcleaner, aldente, Nerd Fonts
+- Shell (zsh + oh-my-zsh plugins, starship prompt)
+- Editor (kickstart-based Neovim config, plugin versions pinned by lazy-lock)
 - Terminal (WezTerm: coolnight colors, random tab names, Ctrl+A leader keys)
-- Window/automation layer (Hammerspoon hyper bindings, hyper key via Raycast)
+- Hammerspoon hyper bindings (hyper key comes from Raycast)
 - Agent configs (one `AGENTS.md` fanned out to Claude, Codex, opencode, and pi;
   Claude `settings.json` with herdr hooks)
-- Git config (SSH signing, global ignores, commit template)
+- Git config (SSH signing, global ignores)
 
 ## Prerequisites
 
@@ -29,8 +33,6 @@ Running the switch builds:
 - Intel Mac: in `configuration.nix`, set `nixpkgs.hostPlatform = "x86_64-darwin";`.
 
 ## Fresh-machine setup
-
-On a brand new Mac, from a bare clone:
 
 ```sh
 git clone git@github.com:arhamj/dotfiles.git
@@ -52,18 +54,18 @@ cd dotfiles
 On a machine with existing dotfiles, conflicting files are moved aside to
 `<name>.hm-backup` automatically.
 
-### Homebrew cleanup warning
+After the first switch, finish these by hand (none are declarable):
 
-`configuration.nix` sets `homebrew.onActivation.cleanup = "zap"`: every switch
-removes any brew package not listed in `brews`/`casks`. That is deliberate -
-it makes ad-hoc `brew install` self-defeating so everything gets declared.
-If something you want disappears, add it to `configuration.nix`.
+- **Raycast**: enable the hyper key (Hammerspoon's bindings depend on it)
+- **Hammerspoon**: grant Accessibility and Screen Recording permissions
+- **claude / herdr / pi / codex**: their own installers put them in
+  `~/.local/bin` or via npm (the claude-code cask is just a fallback)
+- Sign into things, drop any secrets into `~/.config/zsh/secrets.zsh`
 
 ## Daily use
 
-Edit the config files under `home/` in place - they ARE your live config, no
-rebuild needed for symlinked files (WezTerm hot-reloads, nvim reads on next
-launch). You only run:
+Edit files under `home/` in place - they ARE the live config, no rebuild
+needed for symlinked files. You only run:
 
 ```sh
 ./rebuild.sh
@@ -81,6 +83,25 @@ Check for drift any time:
 It verifies every managed path is a symlink into this repo and diffs your
 installed brews against `configuration.nix`.
 
+## Extending (the drift contract)
+
+`cleanup` is deliberately `"none"`: rebuilds never uninstall anything, so
+ad-hoc `brew install` on a given machine is safe. The deal is:
+
+- **Machine-specific or trying something out** -> install freely. Shell lines
+  for it go in `~/.config/zsh/local.zsh` (gitignored, sourced automatically).
+- **Proven, want it everywhere** -> promote it: add the package to
+  `configuration.nix` and any shell lines to `home.nix`, `./rebuild.sh`,
+  commit. `doctor.sh` will keep reminding you about undeclared brews until
+  you either promote or uninstall them.
+- Tools you used to have but dropped are documented with copy-paste snippets
+  in `docs/deferred-setup.md`.
+
+## Secrets
+
+Never commit secrets. `home.nix` sources `~/.config/zsh/secrets.zsh` if it
+exists (the filename is gitignored).
+
 ## Repo tour
 
 - `flake.nix` - entry point: nixpkgs (pinned), nix-darwin, home-manager, nix-homebrew.
@@ -88,6 +109,7 @@ installed brews against `configuration.nix`.
 - `home.nix` - user level: zsh, starship, and every symlink described below.
 - `bootstrap.sh` / `rebuild.sh` / `doctor.sh` - install / apply / verify.
 - `home/` - the real config files, symlinked into place.
+- `docs/` - drift analysis, setup inventory, deferred tool snippets.
 
 ## How the symlinks work
 
@@ -100,15 +122,10 @@ file level because herdr writes logs/sessions into that directory (gitignored).
 `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.config/opencode/AGENTS.md`,
 `~/.pi/agent/AGENTS.md`, and `~/AGENTS.md`.
 
-## Secrets
-
-Never commit secrets. `home.nix` sources `~/.config/zsh/secrets.zsh` if it
-exists (the filename is gitignored). Put tokens and client secrets there.
-
 ## What is intentionally NOT managed here
 
-- `herdr` and `claude` also self-install to `~/.local/bin` (which wins on
-  PATH); the brew/cask entries are the fresh-machine fallback.
+- Anything not on the package lists - by design. Browsers, comms apps,
+  work tooling: install per machine, promote later if they earn it.
 - `~/.claude/hooks/` and `~/.pi/agent/extensions/` - installed and managed by
   herdr/superset themselves.
 - `~/.agents/skills/` - managed by the skills installer (`.skill-lock.json`).
@@ -118,5 +135,4 @@ exists (the filename is gitignored). Put tokens and client secrets there.
 ## Notes
 
 The first `nvim` launch on a fresh machine bootstraps lazy.nvim and plugins
-from GitHub (needs network once). Hammerspoon needs Accessibility and
-Screen Recording permissions after first launch.
+from GitHub at the versions pinned in `lazy-lock.json` (needs network once).

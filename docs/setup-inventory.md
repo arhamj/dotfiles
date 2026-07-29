@@ -1,7 +1,21 @@
 # Setup Inventory: Global vs Work vs Leave-As-Is
 
-Status: DRAFT for review. Nothing here is encoded yet.
-How to use: every config item on this machine is sorted into one of three
+Status: RESOLVED (2026-07-29). Kept for the record.
+
+Final outcome: no profile split. One minimal global config for NEW machines
+only; the machine this was captured from is left unmanaged. Promoted to
+global beyond the original proposal: yazi, k9s, lazydocker, tuxedo, btop,
+cloc, yt-dlp. Removed entirely: jiggler, hiddenbar, .stCommitMsg, ffmpeg
+(dup), both gcloud casks. coreutils and cmake excluded (dependency-pulled
+when needed). cleanup = "none" everywhere; doctor.sh is the drift alarm.
+Everything else: `docs/deferred-setup.md`. Source of truth is now
+`configuration.nix` + `home.nix`, not this file.
+
+---
+
+Original review document below.
+
+## How to use: every config item on this machine is sorted into one of three
 buckets by recommendation. Move items between buckets (edit this file or just
 tell me the moves). When you sign off, I encode it:
 

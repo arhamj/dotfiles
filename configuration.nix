@@ -31,122 +31,58 @@
   };
   homebrew = {
     enable = true;
-    onActivation.cleanup = "zap";  # remove anything not listed here
+    # Never uninstall anything automatically. doctor.sh diffs installed vs
+    # declared packages so drift is visible; prune by hand, promote by
+    # editing this file. Flip to "zap" if you ever want hard lockdown.
+    onActivation.cleanup = "none";
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
     taps = [
-      "d99kris/nchat"   # nchat
-      "gammons/tap"     # slk
-      "oven-sh/bun"     # bun
+      "oven-sh/bun" # bun
     ];
     brews = [
       "herdr"
-      # cli tools
-      "argocd"
-      "awscli"
+      # shell + editor core
+      "neovim"
+      "nvm"
+      "pyenv"
+      "zoxide"
+      "eza"
       "bat"
-      "biome"
-      "bitwarden-cli"
-      "bookokrat"
+      "oven-sh/bun/bun"
+      # everyday cli
+      "fd"
+      "ripgrep"
+      "fzf"
+      "jq"
+      "gh"
+      "lazygit"
+      "lazydocker"
+      "yazi"
       "btop"
       "cloc"
-      "cmake"
-      "coreutils"
-      "d99kris/nchat/nchat"
-      "eza"
-      "fd"
-      "ffmpeg"
-      "ffmpeg-full"
-      "fzf"
-      "gammons/tap/slk"
-      "gh"
-      "glow"
-      "gnu-sed"
-      "helix"
-      "helm"
-      "htop"
-      "imagemagick-full"
-      "jenv"
-      "jq"
-      "just"
-      "k9s"
-      "lazydocker"
-      "lazygit"
-      "libpq"
-      "mongosh"
-      "neovim"
-      "nushell"
-      "nvm"
-      "oven-sh/bun/bun"
-      "pnpm"
-      "poppler"
-      "protoc-gen-go"
-      "pyenv"
-      "rainfrog"
-      "resvg"
-      "ripgrep"
-      "sevenzip"
-      "shellcheck"
-      "tctl"
-      "temporal"
-      "terraform"
-      "tuxedo"
-      "watch"
-      "xcodegen"
-      "yazi"
-      "yq"
       "yt-dlp"
-      "zoxide"
+      # infra
+      "k9s"
+      "tuxedo"
     ];
     casks = [
-      # terminals + editors
+      # terminal + agent
       "wezterm"
-      # agent harnesses (claude also self-installs to ~/.local/bin, which wins on PATH)
-      "claude-code"
-      # system utilities
+      "claude-code" # fallback for the ~/.local/bin self-install
+      # system layer (raycast provides the hyper key hammerspoon binds to)
       "hammerspoon"
       "raycast"
-      "rectangle"
+      # fonts
+      "font-meslo-lg-nerd-font"
+      "font-symbols-only-nerd-font"
+      # quality of life
       "maccy"
-      "hiddenbar"
-      "aldente"
-      "jiggler"
+      "rectangle"
       "monitorcontrol"
       "notunes"
       "appcleaner"
-      "localsend"
-      "1password-cli"
-      # fonts
-      "font-fira-code"
-      "font-meslo-lg-nerd-font"
-      "font-symbols-only-nerd-font"
-      # browsers + comms
-      "arc"
-      "brave-browser"
-      "google-chrome"
-      "slack"
-      "discord"
-      "whatsapp"
-      # dev tools
-      "chatgpt"
-      "clocker"
-      "conductor"
-      "gcloud-cli"
-      "google-cloud-sdk"
-      "handy"
-      "headlamp"
-      "mongodb-compass"
-      "opensuperwhisper"
-      "postman"
-      "protonvpn"
-      "redis-insight"
-      "temurin@21"
-      # hardware / misc
-      "android-file-transfer"
-      "arduino-ide"
-      "capcut"
-      "logi-options+"
-      "webtorrent"
+      "aldente"
     ];
   };
 }
