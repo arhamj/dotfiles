@@ -187,23 +187,23 @@ dotfiles/
 | `doctor.sh` (optional extra Kun doesn't have) | Verifies symlinks resolve into the repo and diffs `brew leaves` against `configuration.nix` - a cheap alarm for anything the construction missed. |
 | Runtime artifacts gitignored | herdr logs/sessions, Hammerspoon Spoons, lazy-lock churn never dirty the repo. |
 
-## 5. Decisions I need from you before implementation
+## 5. Decisions (resolved 2026-07-29)
 
-1. **Shell prompt**: keep oh-my-zsh + powerlevel10k (ported as-is) or switch
-   to starship (simpler, Kun's default)? Recommend: keep p10k now.
-2. **Neovim**: vendor your kickstart fork (recommended - it is your actual
-   daily config) or replace with Kun's minimal diff-review config?
-3. **Package pruning**: I will propose the brew/cask list generated from
-   your machine; you strike anything you do not want on the new MacBook
-   (e.g. `tmux`, `iterm2` leftovers, `warp`?).
-4. **Bitwarden secret**: move to untracked secrets file (recommended) or
-   fetch from Keychain at shell startup like your Hammerspoon Keychain spoon?
-5. **macOS defaults**: adopt Kun's set wholesale (dark mode, dock autohide,
-   menu bar autohide, tap-to-click, list view, clean desktop) - yes/no per
-   item, or all?
-6. **`.dotfiles` stable path**: OK to symlink this repo to `~/.dotfiles`
-   (Kun's convention, required by home.nix paths) while it keeps living in
-   `~/projects/personal/dotfiles`?
+1. **Shell prompt**: switch to starship. oh-my-zsh stays only for its plugin
+   aliases (git, web-search); powerlevel10k and `~/.p10k.zsh` are dropped.
+2. **Neovim**: vendor the kickstart fork into `home/.config/nvim` (upstream
+   `.git` removed).
+3. **Package pruning**: declared in `configuration.nix`. Pruned: `tmux`
+   (dead - Herdr replaced it), `warp` (WezTerm won), `battery-toolkit`
+   (untrusted third-party tap, redundant with AlDente). Everything else from
+   `brew leaves` / `brew list --cask` carried over, plus `herdr` and
+   `claude-code` as fresh-machine fallbacks for the `~/.local/bin` installs.
+4. **Bitwarden secret**: removed from `.zshrc` by hand; shell now sources
+   untracked `~/.config/zsh/secrets.zsh` (gitignored) for machine-local secrets.
+5. **macOS defaults**: Kun's set adopted wholesale.
+6. **`.dotfiles` stable path**: yes - repo symlinks to `~/.dotfiles` via
+   `bootstrap.sh`/`rebuild.sh` while living in `~/projects/personal/dotfiles`.
 
-Once you answer these, implementation is Phases 1-4 above, in order, each as
-its own commit.
+Implementation: Phase 1 (restructure + live capture) and Phase 3 (nix
+backbone) are committed. Phase 4 (bootstrap + verify) is run by the user
+since it needs sudo.
