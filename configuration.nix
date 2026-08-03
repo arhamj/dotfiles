@@ -41,6 +41,7 @@
       "herdr"
       # shell + editor core
       "neovim"
+      "tree-sitter-cli"
       "nvm"
       "pyenv"
       "zoxide"
