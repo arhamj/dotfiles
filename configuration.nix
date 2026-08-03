@@ -77,6 +77,7 @@
       "rectangle"
       "monitorcontrol"
       "google-chrome"
+      "tailscale"
     ];
   };
 }
