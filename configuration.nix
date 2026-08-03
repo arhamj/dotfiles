@@ -47,6 +47,7 @@
       "zoxide"
       "eza"
       "bat"
+      "atuin"
       # everyday cli
       "fd"
       "ripgrep"
