@@ -32,11 +32,6 @@ in
       lg = "lazygit";
       ld = "lazydocker";
       lzd = "lazydocker";
-      # Hand-run codex stays on the API-key home (fleet-dispatched codex gets
-      # the same pin from firstmate's config/codex-home). An alias, not an
-      # export: a global CODEX_HOME leaks into the ChatGPT desktop app, which
-      # then adopts the API-key home instead of the ChatGPT account.
-      codex = ''CODEX_HOME="$HOME/.codex-cli" codex'';
     };
 
     # .zshrc body
