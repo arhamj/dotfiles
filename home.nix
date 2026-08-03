@@ -49,6 +49,11 @@ in
       # zoxide (smarter cd; aliased to `cd` above)
       command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 
+      # atuin
+      export ATUIN_NOBIND="true"
+      eval "$(atuin init zsh)"
+      bindkey '^r' atuin-up-search-viins
+
       # tool paths
       export PATH="$HOME/.local/bin:$PATH"
       export PATH="$PATH:$HOME/go/bin"
