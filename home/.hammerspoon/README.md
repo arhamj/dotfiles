@@ -43,17 +43,6 @@ mkdir ~/.hammerspoon/Spoons
 
 **Note**: `Hyper + t` is reserved for Tailscale toggle, WezTerm binding may be overridden
 
-### Audio Management
-- `Hyper + ]` = Cycle audio output devices
-  - 💻 MacBook Pro Speakers
-  - 🖥️ BenQ PD3205UA
-  - 🎧 OnePlus Buds Pro 2
-- `Hyper + [` = Cycle audio input devices
-  - 💻 MacBook Pro Microphone
-  - 🎧 OnePlus Buds Pro 2
-  - 🎥 OBSBOT Meet 2 Microphone
-- Menu bar shows current audio output (3 letter prefix)
-
 ### System Controls
 - `Hyper + m` = Toggle microphone mute
 - `Hyper + 0` = Reload Hammerspoon config
@@ -82,7 +71,5 @@ mkdir ~/.hammerspoon/Spoons
 ## Notes
 
 - **Hyper Key**: `Caps Lock` mapped to `Cmd + Opt + Ctrl + Shift` via Raycast
-- **Audio switching** includes visual alerts with emojis
 - **Tailscale** intelligently detects connection state and toggles
 - **Microphone mute** provides system-wide mute functionality
-- **Menu bar integration** for audio device status
