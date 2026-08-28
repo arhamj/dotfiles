@@ -12,3 +12,5 @@
 	gpgsign = true
 [gpg]
 	format = ssh
+[init]
+	defaultBranch = main
