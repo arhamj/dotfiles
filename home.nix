@@ -64,6 +64,11 @@ in
       # Deferred tool snippets live in docs/deferred-setup.md.
       if [ -f "$HOME/.config/zsh/secrets.zsh" ]; then . "$HOME/.config/zsh/secrets.zsh"; fi
       if [ -f "$HOME/.config/zsh/local.zsh" ]; then . "$HOME/.config/zsh/local.zsh"; fi
+
+      # WezTerm shell integration (load after prompt and history setup)
+      if [[ "$TERM_PROGRAM" == "WezTerm" && -f "/Applications/WezTerm.app/Contents/Resources/wezterm.sh" ]]; then
+        . "/Applications/WezTerm.app/Contents/Resources/wezterm.sh"
+      fi
     '';
 
     # .zshenv - keep minimal, sourced by every zsh including non-interactive

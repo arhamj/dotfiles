@@ -29,6 +29,20 @@ wezterm.on("format-tab-title", function(tab)
 	return string.format("  %d: %s  ", tab_num, tab_titles[tab_id])
 end)
 
+wezterm.on("update-right-status", function(window)
+	local key_table = window:active_key_table()
+	if key_table == "resize_pane" then
+		window:set_right_status(wezterm.format({
+			{ Background = { Color = "#47FF9C" } },
+			{ Foreground = { Color = "#011423" } },
+			{ Attribute = { Intensity = "Bold" } },
+			{ Text = " RESIZE " },
+		}))
+	else
+		window:set_right_status("")
+	end
+end)
+
 config.colors = {
 	foreground = "#CBE0F0",
 	background = "#011423",
@@ -44,6 +58,7 @@ config.colors = {
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 15
 config.max_fps = 120
+config.front_end = "WebGpu"
 
 -- config.color_scheme = "Catppuccin Macchiato"
 config.use_fancy_tab_bar = false
@@ -51,11 +66,7 @@ config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.scrollback_lines = 10000
 config.audible_bell = "Disabled"
-
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-
 config.enable_tab_bar = true
-
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.94
 config.macos_window_background_blur = 24
@@ -87,9 +98,28 @@ config.keys = {
 	{ key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 	{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	{
+		key = "r",
+		mods = "LEADER",
+		action = act.ActivateKeyTable({
+			name = "resize_pane",
+			one_shot = false,
+			timeout_milliseconds = 2000,
+		}),
+	},
+	{
 		key = "a",
 		mods = "LEADER|CTRL",
 		action = act.SendKey({ key = "a", mods = "CTRL" }),
+	},
+}
+
+config.key_tables = {
+	resize_pane = {
+		{ key = "h", action = act.AdjustPaneSize({ "Left", 3 }) },
+		{ key = "j", action = act.AdjustPaneSize({ "Down", 3 }) },
+		{ key = "k", action = act.AdjustPaneSize({ "Up", 3 }) },
+		{ key = "l", action = act.AdjustPaneSize({ "Right", 3 }) },
+		{ key = "Escape", action = "PopKeyTable" },
 	},
 }
 
