@@ -59,6 +59,7 @@ config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 15
 config.max_fps = 120
 config.front_end = "WebGpu"
+config.default_cwd = wezterm.home_dir .. "/projects"
 
 -- config.color_scheme = "Catppuccin Macchiato"
 config.use_fancy_tab_bar = false
