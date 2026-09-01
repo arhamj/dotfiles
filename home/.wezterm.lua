@@ -18,6 +18,13 @@ local matrix = {
 	diff_removed = "#FF9E64",
 	diff_removed_bright = "#FFBD8A",
 }
+local coolnight = {
+	background = "#011423",
+	foreground = "#CBE0F0",
+	accent = "#47FF9C",
+	muted = "#5F86A2",
+	surface = "#033259",
+}
 local themes = {
 	Matrix = {
 		colors = {
@@ -64,20 +71,44 @@ local themes = {
 	},
 	Coolnight = {
 		colors = {
-			foreground = "#CBE0F0",
-			background = "#011423",
-			cursor_bg = "#47FF9C",
-			cursor_border = "#47FF9C",
-			cursor_fg = "#011423",
-			selection_bg = "#033259",
-			selection_fg = "#CBE0F0",
+			foreground = coolnight.foreground,
+			background = coolnight.background,
+			cursor_bg = coolnight.accent,
+			cursor_border = coolnight.accent,
+			cursor_fg = coolnight.background,
+			selection_bg = coolnight.surface,
+			selection_fg = coolnight.foreground,
 			ansi = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#0FC5ED", "#A277FF", "#24EAF7", "#24EAF7" },
 			brights = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#A277FF", "#A277FF", "#24EAF7", "#24EAF7" },
+			tab_bar = {
+				background = coolnight.background,
+				active_tab = {
+					bg_color = coolnight.surface,
+					fg_color = coolnight.accent,
+					intensity = "Bold",
+				},
+				inactive_tab = {
+					bg_color = coolnight.background,
+					fg_color = coolnight.muted,
+				},
+				inactive_tab_hover = {
+					bg_color = coolnight.surface,
+					fg_color = coolnight.foreground,
+				},
+				new_tab = {
+					bg_color = coolnight.background,
+					fg_color = coolnight.muted,
+				},
+				new_tab_hover = {
+					bg_color = coolnight.surface,
+					fg_color = coolnight.accent,
+				},
+			},
 		},
 		opacity = 0.94,
 		blur = 24,
-		status_bg = "#47FF9C",
-		status_fg = "#011423",
+		status_bg = coolnight.accent,
+		status_fg = coolnight.background,
 	},
 }
 local default_theme = "Matrix"
