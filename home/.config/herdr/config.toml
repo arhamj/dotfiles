@@ -6,6 +6,8 @@ name = "terminal"
 [theme.custom]
 panel_bg = "reset"
 sidebar_bg = "reset"
+active_row_bg = "#17472B"
+selection_bg = "#16657A"
 
 [ui]
 agent_panel_sort = "spaces"
