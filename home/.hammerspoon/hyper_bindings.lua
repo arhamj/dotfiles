@@ -39,18 +39,18 @@ function mkFocusByPreferredApplicationTitle(stopOnFirst, ...)
 end
 
 local applicationHotkeys = {
-	a = "Arc",
-	b = "Bitwarden",
-	c = "Cursor",
-	p = 'Postman',
+	-- a = "Arc",
+	b = "Brave Browser",
+	c = "ChatGPT",
+	-- p = 'Postman',
 	h = "Hammerspoon",
 	n = "Notes",
-	s = "Slack",
+	-- s = "Slack",
 	-- t = "WezTerm",
 	-- d = "Discord",
 	-- g = "Goland",
 	-- o = "Obsidian",
-	w = "WhatsApp",
+	-- w = "WhatsApp",
 }
 for key, app in pairs(applicationHotkeys) do
 	hyperFocusOrOpen(tostring(key), app)
