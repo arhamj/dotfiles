@@ -1,4 +1,12 @@
 onboarding = false
+
+[theme]
+name = "terminal"
+
+[theme.custom]
+panel_bg = "reset"
+sidebar_bg = "reset"
+
 [ui]
 agent_panel_sort = "spaces"
 show_agent_labels_on_pane_borders = true

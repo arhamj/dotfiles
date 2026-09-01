@@ -110,6 +110,9 @@ vim.o.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
 
+-- Only show the command line while it is in use
+vim.o.cmdheight = 0
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -251,8 +254,6 @@ rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-
-  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -887,29 +888,98 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  {
     'catppuccin/nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      -- ---@diagnostic disable-next-line: missing-fields
-      -- require('tokyonight').setup {
-      --   styles = {
-      --     comments = { italic = false }, -- Disable italics in comments
-      --   },
-      -- }
+    name = 'catppuccin',
+    priority = 1000,
+    opts = {
+      transparent_background = true,
+    },
+  },
 
-      require('catppuccin').setup {
-        transparent_background = true,
+  {
+    'scottmckendry/cyberdream.nvim',
+    lazy = false,
+    priority = 1001,
+    config = function()
+      require('cyberdream').setup {
+        variant = 'muted',
+        transparent = true,
+        terminal_colors = false,
+        colors = {
+          bg = '#010704',
+          bg_alt = '#0B1A10',
+          bg_highlight = '#12351F',
+          fg = '#8FD6A2',
+          grey = '#4F8F61',
+          blue = '#82D696',
+          green = '#7DCFFF',
+          cyan = '#A3EFB2',
+          red = '#FF9E64',
+          yellow = '#B0F4BC',
+          magenta = '#93DCA3',
+          pink = '#B7F7C5',
+          orange = '#FFBD8A',
+          purple = '#67B57A',
+        },
       }
 
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      local colorschemes = {
+        Matrix = 'cyberdream',
+        Coolnight = 'catppuccin-mocha',
+      }
+      local wezterm_theme = vim.env.WEZTERM_THEME
+      local theme_state_dir = vim.fn.expand '~/.cache/wezterm'
+      local pane_id = vim.env.WEZTERM_PANE and vim.env.WEZTERM_PANE:match '^%d+$'
+      local state_path = pane_id and (theme_state_dir .. '/theme-' .. pane_id) or nil
+
+      local function read_wezterm_theme()
+        if vim.env.TERM_PROGRAM ~= 'WezTerm' then
+          return 'Coolnight'
+        end
+
+        if state_path then
+          local ok, lines = pcall(vim.fn.readfile, state_path, '', 1)
+          local saved_theme = ok and lines[1] or nil
+          if colorschemes[saved_theme] then
+            return saved_theme
+          end
+        end
+
+        return colorschemes[wezterm_theme] and wezterm_theme or 'Matrix'
+      end
+
+      local active_terminal_theme
+      local function sync_colorscheme()
+        local terminal_theme = read_wezterm_theme()
+        if terminal_theme == active_terminal_theme then
+          return
+        end
+
+        active_terminal_theme = terminal_theme
+        local colorscheme = colorschemes[terminal_theme]
+        if vim.g.colors_name ~= colorscheme then
+          vim.cmd.colorscheme(colorscheme)
+        end
+      end
+
+      sync_colorscheme()
+
+      if state_path then
+        vim.fn.mkdir(theme_state_dir, 'p')
+        if vim.fn.filereadable(state_path) == 0 then
+          vim.fn.writefile({ read_wezterm_theme() }, state_path)
+        end
+
+        local timer = vim.fn.timer_start(250, sync_colorscheme, { ['repeat'] = -1 })
+        vim.api.nvim_create_autocmd('VimLeavePre', {
+          once = true,
+          callback = function()
+            vim.fn.timer_stop(timer)
+          end,
+        })
+        vim.api.nvim_create_autocmd('FocusGained', { callback = sync_colorscheme })
+      end
     end,
   },
 
