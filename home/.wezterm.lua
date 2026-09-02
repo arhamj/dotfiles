@@ -221,7 +221,7 @@ config.color_scheme = default_theme
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 15
 config.max_fps = 120
-config.front_end = "WebGpu"
+config.front_end = "OpenGL"
 config.default_cwd = wezterm.home_dir .. "/projects"
 config.set_environment_variables = { WEZTERM_THEME = default_theme }
 

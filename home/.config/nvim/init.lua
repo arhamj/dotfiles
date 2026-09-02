@@ -110,12 +110,6 @@ vim.o.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
 
--- Only show the command line while it is in use
-vim.o.cmdheight = 0
-
--- Use a steady block cursor in every mode
-vim.o.guicursor = 'a:block-blinkon0'
-
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
