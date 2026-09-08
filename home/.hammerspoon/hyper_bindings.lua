@@ -78,4 +78,6 @@ function toggleApp(appName)
 	end
 end
 
-hs.hotkey.bind({ "ctrl" }, "`", function() toggleApp("WezTerm") end)
+hs.hotkey.bind({ "ctrl" }, "`", function()
+	toggleApp("WezTerm")
+end)

@@ -12,3 +12,6 @@ selection_bg = "#16657A"
 [ui]
 agent_panel_sort = "spaces"
 show_agent_labels_on_pane_borders = true
+
+[experimental]
+kitty_graphics = true

@@ -14,3 +14,6 @@ home/.hammerspoon/Spoons/
 
 # machine-local secrets, sourced by zsh if present - never commit
 secrets.zsh
+
+# machine-local documentation - never commit
+/docs/local/

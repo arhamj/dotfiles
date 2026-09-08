@@ -37,8 +37,26 @@ local themes = {
 			selection_fg = matrix.bright,
 			split = matrix.selection,
 			scrollbar_thumb = matrix.muted,
-			ansi = { "#07120B", matrix.diff_removed, matrix.diff_added, "#93DCA3", "#4E9D63", "#67B57A", "#82D696", "#A9E9B5" },
-			brights = { "#234D30", matrix.diff_removed_bright, matrix.diff_added_bright, "#B0F4BC", "#74C789", "#8FDFA1", "#A3EFB2", "#D0F8D7" },
+			ansi = {
+				"#07120B",
+				matrix.diff_removed,
+				matrix.diff_added,
+				"#93DCA3",
+				"#4E9D63",
+				"#67B57A",
+				"#82D696",
+				"#A9E9B5",
+			},
+			brights = {
+				"#234D30",
+				matrix.diff_removed_bright,
+				matrix.diff_added_bright,
+				"#B0F4BC",
+				"#74C789",
+				"#8FDFA1",
+				"#A3EFB2",
+				"#D0F8D7",
+			},
 			tab_bar = {
 				background = matrix.background,
 				active_tab = {
@@ -221,7 +239,7 @@ config.color_scheme = default_theme
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 15
 config.max_fps = 120
-config.front_end = "OpenGL"
+config.front_end = "WebGpu"
 config.default_cwd = wezterm.home_dir .. "/projects"
 config.set_environment_variables = { WEZTERM_THEME = default_theme }
 
