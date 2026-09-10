@@ -1,0 +1,27 @@
+# Matrix palette shared with WezTerm and Neovim.
+# Blue additions and orange deletions keep diffs distinct from the green UI.
+background = #010704
+foreground = #8FD6A2
+cursor-color = #B7F7C5
+cursor-text = #010704
+selection-background = #12351F
+selection-foreground = #B7F7C5
+split-divider-color = #12351F
+background-opacity = 0.9
+background-blur = 12
+palette = 0=#07120B
+palette = 1=#FF9E64
+palette = 2=#7DCFFF
+palette = 3=#93DCA3
+palette = 4=#4E9D63
+palette = 5=#67B57A
+palette = 6=#82D696
+palette = 7=#A9E9B5
+palette = 8=#234D30
+palette = 9=#FFBD8A
+palette = 10=#B5E8FF
+palette = 11=#B0F4BC
+palette = 12=#74C789
+palette = 13=#8FDFA1
+palette = 14=#A3EFB2
+palette = 15=#D0F8D7

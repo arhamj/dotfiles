@@ -924,13 +924,40 @@ require('lazy').setup({
       local colorschemes = {
         Matrix = 'cyberdream',
         Coolnight = 'catppuccin-mocha',
+        ['Catppuccin Macchiato'] = 'catppuccin-macchiato',
       }
       local wezterm_theme = vim.env.WEZTERM_THEME
       local theme_state_dir = vim.fn.expand '~/.cache/wezterm'
-      local pane_id = vim.env.WEZTERM_PANE and vim.env.WEZTERM_PANE:match '^%d+$'
+      local xdg_config = vim.env.XDG_CONFIG_HOME
+      local config_dir = xdg_config and xdg_config ~= '' and xdg_config or vim.fn.expand '~/.config'
+      local ghostty_config = config_dir .. '/ghostty/config.ghostty'
+      -- Herdr sessions retain the environment of the terminal that started them.
+      -- Use Ghostty's config as their shared theme preference when available.
+      local follow_ghostty = vim.env.TERM_PROGRAM == 'ghostty'
+        or (vim.env.HERDR_ENV == '1' and vim.fn.filereadable(ghostty_config) == 1)
+      local ghostty_config_path = follow_ghostty and ghostty_config or nil
+      local pane_id = not follow_ghostty
+        and vim.env.TERM_PROGRAM == 'WezTerm'
+        and vim.env.WEZTERM_PANE
+        and vim.env.WEZTERM_PANE:match '^%d+$'
       local state_path = pane_id and (theme_state_dir .. '/theme-' .. pane_id) or nil
 
-      local function read_wezterm_theme()
+      local function read_terminal_theme()
+        if ghostty_config_path then
+          local selected_theme = 'Matrix'
+          local ok, lines = pcall(vim.fn.readfile, ghostty_config_path)
+          if ok then
+            for _, line in ipairs(lines) do
+              local name = line:match '^%s*theme%s*=%s*(.-)%s*$'
+              if name then
+                name = name:gsub('^"(.*)"$', '%1')
+                selected_theme = colorschemes[name] and name or 'Matrix'
+              end
+            end
+          end
+          return selected_theme
+        end
+
         if vim.env.TERM_PROGRAM ~= 'WezTerm' then
           return 'Coolnight'
         end
@@ -948,7 +975,7 @@ require('lazy').setup({
 
       local active_terminal_theme
       local function sync_colorscheme()
-        local terminal_theme = read_wezterm_theme()
+        local terminal_theme = read_terminal_theme()
         if terminal_theme == active_terminal_theme then
           return
         end
@@ -965,9 +992,11 @@ require('lazy').setup({
       if state_path then
         vim.fn.mkdir(theme_state_dir, 'p')
         if vim.fn.filereadable(state_path) == 0 then
-          vim.fn.writefile({ read_wezterm_theme() }, state_path)
+          vim.fn.writefile({ read_terminal_theme() }, state_path)
         end
+      end
 
+      if state_path or ghostty_config_path then
         local timer = vim.fn.timer_start(250, sync_colorscheme, { ['repeat'] = -1 })
         vim.api.nvim_create_autocmd('VimLeavePre', {
           once = true,

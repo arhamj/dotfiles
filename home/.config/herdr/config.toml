@@ -1,13 +1,13 @@
 onboarding = false
 
 [theme]
+# Follow the host terminal palette when WezTerm cycles themes.
 name = "terminal"
 
 [theme.custom]
 panel_bg = "reset"
 sidebar_bg = "reset"
-active_row_bg = "#17472B"
-selection_bg = "#16657A"
+# Use the terminal theme's palette-based row and selection colors.
 
 [ui]
 agent_panel_sort = "spaces"

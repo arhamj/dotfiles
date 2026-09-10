@@ -48,7 +48,7 @@ mkdir ~/.hammerspoon/Spoons
 - `Hyper + 0` = Reload Hammerspoon config
 - `Hyper + t` = Toggle Tailscale connection
 - `Cmd + q` = Slow quit (hold to quit apps)
-- `Ctrl + \`` = Toggle WezTerm visibility
+- `Ctrl + \`` = WezTerm visibility binding is commented out; Ghostty now uses this shortcut for its quick terminal.
 
 ### Network Tools
 - Ping utility (background network monitoring)

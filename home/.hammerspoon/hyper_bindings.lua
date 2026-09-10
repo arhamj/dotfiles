@@ -78,6 +78,7 @@ function toggleApp(appName)
 	end
 end
 
-hs.hotkey.bind({ "ctrl" }, "`", function()
-	toggleApp("WezTerm")
-end)
+-- Disabled: Ctrl+backtick is now handled by Ghostty's quick terminal.
+-- hs.hotkey.bind({ "ctrl" }, "`", function()
+-- 	toggleApp("WezTerm")
+-- end)

@@ -25,6 +25,7 @@ local coolnight = {
 	muted = "#5F86A2",
 	surface = "#033259",
 }
+local catppuccin = wezterm.color.get_builtin_schemes()["Catppuccin Macchiato"]
 local themes = {
 	Matrix = {
 		colors = {
@@ -128,8 +129,16 @@ local themes = {
 		status_bg = coolnight.accent,
 		status_fg = coolnight.background,
 	},
+	["Catppuccin Macchiato"] = {
+		colors = catppuccin,
+		opacity = 0.94,
+		blur = 24,
+		status_bg = catppuccin.cursor_bg,
+		status_fg = catppuccin.background,
+	},
 }
-local default_theme = "Matrix"
+local theme_order = { "Matrix", "Coolnight", "Catppuccin Macchiato" }
+local default_theme = theme_order[1]
 local theme_state_dir = wezterm.home_dir .. "/.cache/wezterm"
 
 local function random_five_letter_word()
@@ -198,7 +207,13 @@ end)
 
 wezterm.on("toggle-theme", function(window)
 	local current_name = active_theme_name(window)
-	local next_name = current_name == "Matrix" and "Coolnight" or "Matrix"
+	local next_name = default_theme
+	for index, name in ipairs(theme_order) do
+		if name == current_name then
+			next_name = theme_order[index % #theme_order + 1]
+			break
+		end
+	end
 	local next_theme = themes[next_name]
 	local overrides = window:get_config_overrides() or {}
 	local environment = overrides.set_environment_variables or {}
@@ -236,14 +251,14 @@ for name, theme in pairs(themes) do
 end
 config.color_scheme = default_theme
 
-config.font = wezterm.font("MesloLGS Nerd Font Mono")
+-- config.font = wezterm.font("MesloLGS Nerd Font Mono")
+config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
 config.font_size = 15
 config.max_fps = 120
 config.front_end = "WebGpu"
 config.default_cwd = wezterm.home_dir .. "/projects"
 config.set_environment_variables = { WEZTERM_THEME = default_theme }
 
--- config.color_scheme = "Catppuccin Macchiato"
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true

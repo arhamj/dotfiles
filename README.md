@@ -16,11 +16,12 @@ and anti-drift design borrowed from
 - Homebrew itself, plus a small declared set (full list in `configuration.nix`):
   - CLI: herdr, neovim, nvm, pyenv, zoxide, eza, bat, fd, ripgrep, fzf,
     jq, gh, lazygit, lazydocker, yazi, btop, cloc, yt-dlp, k9s, tuxedo
-  - Apps: wezterm, claude-code, hammerspoon, raycast, maccy, rectangle,
+  - Apps: ghostty, wezterm, claude-code, hammerspoon, raycast, maccy, rectangle,
     monitorcontrol, Nerd Fonts
 - Shell (zsh + oh-my-zsh plugins, starship prompt)
 - Editor (kickstart-based Neovim config, plugin versions pinned by lazy-lock)
-- Terminal (WezTerm: coolnight colors, random tab names, Ctrl+A leader keys)
+- Terminals (Ghostty and WezTerm: Matrix, Coolnight, and Catppuccin Macchiato colors, JetBrains Mono Nerd Font,
+  Ctrl+A leader keys; Ghostty also has a Quake-style quick terminal)
 - Hammerspoon hyper bindings (hyper key comes from Raycast)
 - Agent configs (one `AGENTS.md` fanned out to Claude, Codex, opencode, and pi;
   Claude `settings.json` with herdr hooks)
@@ -84,6 +85,76 @@ Check for drift any time:
 
 It verifies every managed path is a symlink into this repo and diffs your
 installed brews against `configuration.nix`.
+
+## WezTerm
+
+Press **Ctrl+A**, then **t** to cycle **Matrix -> Coolnight -> Catppuccin Macchiato -> Matrix**.
+The switch applies to the current window, and Neovim running directly in WezTerm
+follows the selected theme. Inside Herdr, Neovim follows Ghostty's config when
+available, as described below.
+Matrix is the default for new windows. Catppuccin uses WezTerm's built-in
+Macchiato palette with the same opacity and blur as Coolnight.
+
+Herdr uses its `terminal` theme so its UI and selection colors follow the host
+palette too. Its **Ctrl+B** prefix remains separate from WezTerm's **Ctrl+A**.
+
+## Ghostty
+
+Launch Ghostty from Applications or Raycast. Its live config is
+`home/.config/ghostty/config.ghostty`, linked to
+`~/.config/ghostty/config.ghostty`. Edit it here and press `Cmd+Shift+,` to
+reload. Configuration reference: <https://ghostty.org/docs/config>.
+
+Ghostty uses the Catppuccin Macchiato palette, 15-point JetBrainsMono Nerd Font Mono,
+a steady block cursor, 94% opacity, blur of 24, and a hidden title bar. It starts in
+`~/projects`; subsequent windows and splits inherit the current directory.
+Window layout and directories are restored on relaunch, but running processes
+are not. Existing zsh, Starship, Atuin, aliases, and Neovim config load normally;
+Neovim follows the theme selected in the Ghostty config. Neovim inside Herdr also
+uses this config when available, since persistent panes can retain an old
+WezTerm environment after switching terminal apps. Direct WezTerm sessions
+continue to follow WezTerm's selected theme.
+
+To switch themes, change `theme = Catppuccin Macchiato` to `theme = Matrix` or
+`theme = Coolnight` in `home/.config/ghostty/config.ghostty`, then press
+`Cmd+Shift+,`. All three palettes live under `home/.config/ghostty/themes/` and
+match WezTerm's colors, opacity, and blur. The local Macchiato palette preserves
+WezTerm's ANSI colors and cursor text, which differ from Ghostty's bundled theme.
+Ghostty has no native theme-toggle action.
+
+Press **Ctrl+backtick** to show or hide the quick terminal. It slides
+down from the top, spans the screen width and half its height, follows the
+active display and Space, and hides when it loses focus. Enable Ghostty in
+**System Settings > Privacy & Security > Accessibility** when prompted so
+the shortcut works from other apps. Ghostty must be running. The previous
+Hammerspoon binding for WezTerm is commented out in `hyper_bindings.lua`.
+
+Ghostty appears in the Dock and Cmd+Tab (`macos-hidden = never`). New regular
+windows open maximized (`maximize = true`); the quick terminal keeps its
+half-height drop-down layout.
+
+After changing the title-bar style, reload the config and open a new window
+(or restart Ghostty). Hidden title bars disable native macOS tabs, so new-tab
+shortcuts open windows instead; use splits within the quick terminal.
+Option-drag a window edge to move a titleless window.
+
+| Shortcut | Action |
+| --- | --- |
+| `Ctrl+backtick` | Toggle the quick terminal globally |
+| `Ctrl+A`, then `\|` / `-` | Split right / down |
+| `Ctrl+A`, then `h` / `j` / `k` / `l` | Focus a split |
+| `Ctrl+A`, then `z` / `x` / `c` | Zoom split / close split / new window |
+| `Ctrl+A`, then `r`, then `h` / `j` / `k` / `l` | Resize one step |
+| `Ctrl+A`, then `=` | Equalize splits |
+| `Ctrl+A`, then `Escape` / `Ctrl+A` | Cancel leader / send literal Ctrl+A |
+| `Cmd+N` / `Cmd+T` | New window |
+| `Cmd+D` / `Cmd+Shift+D` | Split right / split down |
+| `Cmd+F` / `Cmd+Shift+P` | Search scrollback / command palette |
+| `Cmd+Ctrl+arrows` | Resize splits repeatedly |
+
+Ghostty's leader sequences have no timeout. Repeat the full resize sequence
+for each step, or use `Cmd+Ctrl+arrows`. Left Option acts as Alt for terminal
+shortcuts; right Option remains available for typing special characters.
 
 ## Extending (the drift contract)
 
