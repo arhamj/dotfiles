@@ -96,6 +96,10 @@ in
   };
 
   # Edit-in-place: the real files live in this repo, ~ just points at them.
+  home.file.".config/ghostty/config.ghostty".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty/config.ghostty";
+  home.file.".config/ghostty/themes".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty/themes";
   home.file.".wezterm.lua".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.wezterm.lua";
   home.file.".hammerspoon".source =

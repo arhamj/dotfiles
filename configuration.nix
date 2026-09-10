@@ -67,12 +67,14 @@
     ];
     casks = [
       # terminal + agent
+      "ghostty"
       "wezterm"
       "claude-code"
       # system layer (raycast provides the hyper key hammerspoon binds to)
       "hammerspoon"
       "raycast"
       # fonts
+      "font-jetbrains-mono-nerd-font"
       "font-meslo-lg-nerd-font"
       "font-symbols-only-nerd-font"
       # quality of life

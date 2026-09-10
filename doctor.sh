@@ -12,9 +12,9 @@ bad()   { note "  DRIFT: $*"; FAIL=1; }
 
 note "==> ~/.dotfiles stable path"
 if [ "$(readlink "$HOME/.dotfiles" 2>/dev/null)" = "$DIR" ]; then
-  ok "~/.dotfiles -> $DIR"
+  ok "$HOME/.dotfiles -> $DIR"
 else
-  bad "~/.dotfiles does not point at $DIR (run ./rebuild.sh)"
+  bad "$HOME/.dotfiles does not point at $DIR (run ./rebuild.sh)"
 fi
 
 note "==> symlinks into the repo"
@@ -29,6 +29,8 @@ check_link() { # $1 = path relative to $HOME
     *) bad "$1 is not a symlink into the repo (found: ${resolved:-missing})" ;;
   esac
 }
+check_link ".config/ghostty/config.ghostty"
+check_link ".config/ghostty/themes"
 check_link ".wezterm.lua"
 check_link ".hammerspoon"
 check_link ".config/nvim"
