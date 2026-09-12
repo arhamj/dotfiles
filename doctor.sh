@@ -31,6 +31,7 @@ check_link() { # $1 = path relative to $HOME
 }
 check_link ".config/ghostty/config.ghostty"
 check_link ".config/ghostty/themes"
+check_link "Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 check_link ".wezterm.lua"
 check_link ".hammerspoon"
 check_link ".config/nvim"

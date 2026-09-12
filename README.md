@@ -14,10 +14,12 @@ and anti-drift design borrowed from
 
 - System settings (dark mode, key repeat, dock, Finder, trackpad)
 - Homebrew itself, plus a small declared set (full list in `configuration.nix`):
-  - CLI: herdr, neovim, nvm, pyenv, zoxide, eza, bat, fd, ripgrep, fzf,
-    jq, gh, lazygit, lazydocker, yazi, btop, cloc, yt-dlp, k9s, tuxedo
-  - Apps: ghostty, wezterm, claude-code, hammerspoon, raycast, maccy, rectangle,
-    monitorcontrol, Nerd Fonts
+  - CLI: herdr, neovim, tree-sitter-cli, nvm, pyenv, zoxide, eza, bat, atuin,
+    fd, ripgrep, fzf, jq, gh, lazygit, lazydocker, yazi, btop, cloc, yt-dlp,
+    chafa, csvlens, ffmpeg, glow, pinentry-mac, poppler, k9s, tuxedo
+  - Apps: ghostty, wezterm, claude-code, ChatGPT, CodexBar, OpenLogi,
+    Hammerspoon, Raycast, Handy, Proton VPN, Maccy, Rectangle, MonitorControl,
+    Google Chrome, Brave Browser, Tailscale, and Nerd Fonts
 - Shell (zsh + oh-my-zsh plugins, starship prompt)
 - Editor (kickstart-based Neovim config, plugin versions pinned by lazy-lock)
 - Terminals (Ghostty and WezTerm: Matrix, Coolnight, and Catppuccin Macchiato colors, JetBrains Mono Nerd Font,
@@ -102,8 +104,10 @@ palette too. Its **Ctrl+B** prefix remains separate from WezTerm's **Ctrl+A**.
 
 Launch Ghostty from Applications or Raycast. Its live config is
 `home/.config/ghostty/config.ghostty`, linked to
-`~/.config/ghostty/config.ghostty`. Edit it here and press `Cmd+Shift+,` to
-reload. Configuration reference: <https://ghostty.org/docs/config>.
+`~/.config/ghostty/config.ghostty` and the macOS-preferred
+`~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`. Edit it
+here and press `Cmd+Shift+,` to reload. Configuration reference:
+<https://ghostty.org/docs/config>.
 
 Ghostty uses the Catppuccin Macchiato palette, 15-point JetBrainsMono Nerd Font Mono,
 a steady block cursor, 94% opacity, blur of 24, and a hidden title bar. It starts in

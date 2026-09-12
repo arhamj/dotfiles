@@ -61,6 +61,12 @@
       "btop"
       "cloc"
       "yt-dlp"
+      "chafa"
+      "csvlens"
+      "ffmpeg"
+      "glow"
+      "pinentry-mac"
+      "poppler"
       # infra
       "k9s"
       "tuxedo"
@@ -70,9 +76,14 @@
       "ghostty"
       "wezterm"
       "claude-code"
+      "chatgpt"
+      "codexbar"
+      "openlogi"
       # system layer (raycast provides the hyper key hammerspoon binds to)
       "hammerspoon"
       "raycast"
+      "handy"
+      "protonvpn"
       # fonts
       "font-jetbrains-mono-nerd-font"
       "font-meslo-lg-nerd-font"
@@ -82,7 +93,8 @@
       "rectangle"
       "monitorcontrol"
       "google-chrome"
-      "tailscale"
+      "brave-browser"
+      "tailscale-app"
     ];
   };
 }
