@@ -31,7 +31,7 @@ keybind = global:ctrl+backquote=toggle_quick_terminal
 quick-terminal-position = top
 quick-terminal-size = 50%,100%
 quick-terminal-screen = main
-quick-terminal-animation-duration = 0.075
+quick-terminal-animation-duration = 0
 quick-terminal-autohide = true
 quick-terminal-space-behavior = move
 
