@@ -20,6 +20,7 @@
       _HIHideMenuBar = true;  # auto-hide the menu bar
       AppleShowAllExtensions = true;
     };
+    CustomUserPreferences.NSGlobalDomain.NSConvolutionOverride1 = 0.1;
     dock.autohide = true;
     finder.FXPreferredViewStyle = "Nlsv";  # list view by default
     finder.CreateDesktop = false;          # clean desktop
