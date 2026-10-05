@@ -1,8 +1,8 @@
 -- Based on https://github.com/atsepkov/hammerspoon-config/blob/master/modules/pomodoor.lua
 
 -- Pomodoro module
-local pom_work_period_sec  = 25 * 60
-local pom_rest_period_sec  = 5 * 60
+local pom_work_period_sec  = 50 * 60
+local pom_rest_period_sec  = 10 * 60
 local pom_work_count       = 0
 local pom_curr_active_type = "W" -- {"work", "rest"}
 local pom_is_active        = false
@@ -96,6 +96,8 @@ function pom_enable()
         hs.alert.show("Starting Pomodoro...", 2)
         pom_create_menu()
         pom_timer = hs.timer.new(1, pom_update_menu)
+    else
+        hs.alert.show("Pomodoro resumed", 2)
     end
 
     pom_is_active = true

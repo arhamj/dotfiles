@@ -44,6 +44,8 @@
       # shell + editor core
       "neovim"
       "tree-sitter-cli"
+      "imagemagick"
+      "mermaid-cli"
       "nvm"
       "pyenv"
       "zoxide"

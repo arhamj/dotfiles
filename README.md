@@ -16,7 +16,8 @@ and anti-drift design borrowed from
 - Homebrew itself, plus a small declared set (full list in `configuration.nix`):
   - CLI: herdr, neovim, tree-sitter-cli, nvm, pyenv, zoxide, eza, bat, atuin,
     fd, ripgrep, fzf, jq, gh, lazygit, lazydocker, yazi, btop, cloc, yt-dlp,
-    chafa, csvlens, ffmpeg, glow, pinentry-mac, poppler, k9s, tuxedo
+    chafa, csvlens, ffmpeg, glow, imagemagick, mermaid-cli, pinentry-mac,
+    poppler, k9s, tuxedo
   - Apps: ghostty, wezterm, claude-code, ChatGPT, CodexBar, OpenLogi,
     Hammerspoon, Raycast, Handy, Proton VPN, Maccy, Rectangle, MonitorControl,
     Google Chrome, Brave Browser, Tailscale, and Nerd Fonts
@@ -159,6 +160,46 @@ Option-drag a window edge to move a titleless window.
 Ghostty's leader sequences have no timeout. Repeat the full resize sequence
 for each step, or use `Cmd+Ctrl+arrows`. Left Option acts as Alt for terminal
 shortcuts; right Option remains available for typing special characters.
+
+## Neovim
+
+Snacks renders fenced `mermaid` blocks inline in Markdown through Kitty
+graphics. Use Ghostty directly or Herdr 0.9.3+ with `kitty_graphics = true`
+in `[terminal]`. Open a Markdown file normally; the source stays editable and
+the diagram appears below it. Rendering starts a headless browser; unchanged
+diagrams reuse cached images. Inline previews are capped at 24 rows.
+
+`imagemagick` and `mermaid-cli` are declared Homebrew dependencies. Neovim
+uses the Google Chrome installation managed by this repo for Mermaid rendering,
+unless `PUPPETEER_EXECUTABLE_PATH` is already set. No separate Puppeteer browser
+download is needed. Run `:checkhealth snacks` to diagnose missing dependencies
+or terminal support. LaTeX/Typst math rendering is disabled. The full health
+report also checks disabled modules and optional PDF/math tools; these are not
+required for Mermaid.
+
+Snacks also adds floating input prompts, faster initial file display, and
+large-file protection (disabling expensive features for files over 1.5 MiB or
+with very long average lines). Telescope, Neo-tree, and LSP reference highlighting
+keep their existing configuration.
+
+The leader key is **Space**:
+
+| Shortcut | Action |
+| --- | --- |
+| `Space ?` / `Space s k` | Find an action by its description or shortcut; Enter runs it |
+| `Space s c` | Search available plugin/user commands |
+| `Space s h` | Search Neovim and plugin help |
+| `Space m p` | Preview the image or Mermaid block under the cursor in a float |
+| `Space b d` | Close the current buffer while keeping the split layout |
+| `Space g g` | Open LazyGit in a floating terminal |
+| `Space g B` | Open the file or selected lines on the Git remote's website |
+
+Tap **Space** and browse Which-Key when you remember the category. Use
+**Space ?** and type a word such as `mermaid`, `close buffer`, or `github`
+when you remember the action. Search uses the live keymaps and their `desc`
+labels, with internal `<Plug>` mappings hidden. Labels live beside the mappings
+in the config and also appear in Which-Key; there is no separate action catalog
+to synchronize with plugin upgrades.
 
 ## Extending (the drift contract)
 

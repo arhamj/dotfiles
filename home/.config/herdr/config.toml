@@ -14,5 +14,5 @@ sidebar_collapsed_mode = "hidden"
 agent_panel_sort = "spaces"
 show_agent_labels_on_pane_borders = true
 
-[experimental]
+[terminal]
 kitty_graphics = true

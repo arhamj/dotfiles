@@ -347,6 +347,9 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
+        { '<leader>b', group = '[B]uffer' },
+        { '<leader>g', group = '[G]it', mode = { 'n', 'x' } },
+        { '<leader>m', group = '[M]arkdown' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
@@ -415,7 +418,10 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          -- Search the live mappings and their descriptions; no separate action list.
+          keymaps = { show_plug = false, prompt_title = 'Find an action' },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -429,8 +435,10 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+      vim.keymap.set('n', '<leader>?', builtin.keymaps, { desc = 'Find an action (search shortcuts)' })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+      vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
       vim.keymap.set('n', '<leader>sf', function()
         builtin.find_files {
           find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/**' },
@@ -933,13 +941,9 @@ require('lazy').setup({
       local ghostty_config = config_dir .. '/ghostty/config.ghostty'
       -- Herdr sessions retain the environment of the terminal that started them.
       -- Use Ghostty's config as their shared theme preference when available.
-      local follow_ghostty = vim.env.TERM_PROGRAM == 'ghostty'
-        or (vim.env.HERDR_ENV == '1' and vim.fn.filereadable(ghostty_config) == 1)
+      local follow_ghostty = vim.env.TERM_PROGRAM == 'ghostty' or (vim.env.HERDR_ENV == '1' and vim.fn.filereadable(ghostty_config) == 1)
       local ghostty_config_path = follow_ghostty and ghostty_config or nil
-      local pane_id = not follow_ghostty
-        and vim.env.TERM_PROGRAM == 'WezTerm'
-        and vim.env.WEZTERM_PANE
-        and vim.env.WEZTERM_PANE:match '^%d+$'
+      local pane_id = not follow_ghostty and vim.env.TERM_PROGRAM == 'WezTerm' and vim.env.WEZTERM_PANE and vim.env.WEZTERM_PANE:match '^%d+$'
       local state_path = pane_id and (theme_state_dir .. '/theme-' .. pane_id) or nil
 
       local function read_terminal_theme()
