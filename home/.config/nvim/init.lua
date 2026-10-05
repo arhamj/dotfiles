@@ -176,6 +176,16 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR><cmd>update<CR>', { desc = 'Sav
 -- Select the entire buffer
 vim.keymap.set('n', '<C-a>', 'ggVG', { desc = 'Select all' })
 
+vim.keymap.set('n', '<leader>yp', function()
+  local path = vim.api.nvim_buf_get_name(0)
+  if path == '' then
+    vim.notify('Current buffer has no file path', vim.log.levels.WARN)
+    return
+  end
+  vim.fn.setreg('+', path)
+  vim.notify('Copied file path: ' .. path)
+end, { desc = '[Y]ank file [P]ath to clipboard' })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -352,6 +362,7 @@ require('lazy').setup({
         { '<leader>m', group = '[M]arkdown' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
+        { '<leader>y', group = '[Y]ank' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       },
     },
