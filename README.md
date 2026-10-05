@@ -163,11 +163,16 @@ shortcuts; right Option remains available for typing special characters.
 
 ## Neovim
 
-Snacks renders fenced `mermaid` blocks inline in Markdown through Kitty
-graphics. Use Ghostty directly or Herdr 0.9.3+ with `kitty_graphics = true`
-in `[terminal]`. Open a Markdown file normally; the source stays editable and
-the diagram appears below it. Rendering starts a headless browser; unchanged
-diagrams reuse cached images. Inline previews are capped at 24 rows.
+Mermaid diagrams and images open only on demand with **Space m p**; automatic
+inline previews and hover popups are disabled. The preview is a large, centered
+Neovim popup with vertical scrolling and a default zoom of 75%. Use `j` / `k` or the
+mouse wheel to scroll, `Ctrl+d` / `Ctrl+u` to page, `+` / `-` to zoom, `0` to reset
+the zoom, and `q` / `Esc` to close. Tall diagrams extend below the viewport
+instead of shrinking to fit its height.
+
+Previews use Snacks and Kitty graphics. Use Ghostty directly or Herdr 0.9.3+
+with `kitty_graphics = true` in `[terminal]`. Rendering starts a headless browser;
+unchanged diagrams reuse cached images.
 
 `imagemagick` and `mermaid-cli` are declared Homebrew dependencies. Neovim
 uses the Google Chrome installation managed by this repo for Mermaid rendering,
@@ -176,6 +181,10 @@ download is needed. Run `:checkhealth snacks` to diagnose missing dependencies
 or terminal support. LaTeX/Typst math rendering is disabled. The full health
 report also checks disabled modules and optional PDF/math tools; these are not
 required for Mermaid.
+
+If rendering reports `Conversion failed at step mmd: No command available`,
+install the declared dependencies with `brew install mermaid-cli imagemagick`
+and restart Neovim. Snacks caches executable availability for the session.
 
 Snacks also adds floating input prompts, faster initial file display, and
 large-file protection (disabling expensive features for files over 1.5 MiB or
@@ -189,7 +198,8 @@ The leader key is **Space**:
 | `Space ?` / `Space s k` | Find an action by its description or shortcut; Enter runs it |
 | `Space s c` | Search available plugin/user commands |
 | `Space s h` | Search Neovim and plugin help |
-| `Space m p` | Preview the image or Mermaid block under the cursor in a float |
+| `Space m p` | Open a scrollable, zoomable popup for the image or Mermaid block under the cursor |
+| `Space y p` | Copy the current file's absolute path to the system clipboard |
 | `Space b d` | Close the current buffer while keeping the split layout |
 | `Space g g` | Open LazyGit in a floating terminal |
 | `Space g B` | Open the file or selected lines on the Git remote's website |

@@ -36,9 +36,10 @@ return {
       input = { enabled = true },
       image = {
         enabled = true,
-        doc = { max_height = 24 },
+        doc = { enabled = false, inline = false, float = false },
         math = { enabled = false },
-        convert = { notify = true },
+        -- The manual preview displays conversion errors in its own window.
+        convert = { notify = false },
       },
     }
   end,
@@ -46,9 +47,9 @@ return {
     {
       '<leader>mp',
       function()
-        Snacks.image.hover()
+        require('custom.image-preview').open()
       end,
-      desc = 'Preview Mermaid diagram / image',
+      desc = 'Preview Mermaid diagram / image (scroll and zoom)',
     },
     {
       '<leader>bd',
