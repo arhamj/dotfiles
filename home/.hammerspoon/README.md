@@ -53,6 +53,11 @@ mkdir ~/.hammerspoon/Spoons
 ### Network Tools
 - Ping utility (background network monitoring)
 
+### Pomodoro Timer
+- 50-minute work sessions and 10-minute breaks
+- `Hyper + =` = Start or resume the timer
+- `Hyper + -` = Pause; press again to reset, and a third time to hide
+
 ## Disabled Features
 
 ### Commented Out Apps
@@ -65,7 +70,6 @@ mkdir ~/.hammerspoon/Spoons
 ### Commented Out Modules
 ```lua
 -- require 'tunnelblick'  -- VPN connection toggle
--- require 'pomodoro'     -- Pomodoro timer
 ```
 
 ## Notes
